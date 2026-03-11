@@ -1,16 +1,17 @@
 site_name: Pagopar SDK Wiki
 site_description: Documentation and framework integration guides for pagopar-sdk
-site_url: https://example.com/pagopar-sdk
+site_url: https://devpbeat.github.io/pagopar-sdk/
+repo_url: https://github.com/devpbeat/pagopar-sdk
+repo_name: devpbeat/pagopar-sdk
 
 theme:
-  name: material
+  name: mkdocs
 
 plugins:
   - search
   - i18n:
       docs_structure: folder
       fallback_to_default: true
-      reconfigure_material: true
       languages:
         - locale: en
           default: true
@@ -19,6 +20,8 @@ plugins:
           nav_translations:
             Home: Home
             Wiki Generator: Wiki Generator
+            Contributing: Contributing
+            PyPI Publishing: PyPI Publishing
             Django Example: Django Example
             FastAPI Example: FastAPI Example
             Flask Example: Flask Example
@@ -28,6 +31,8 @@ plugins:
           nav_translations:
             Home: Inicio
             Wiki Generator: Generación de Wiki
+            Contributing: Contribuir
+            PyPI Publishing: Publicación en PyPI
             Django Example: Ejemplo Django
             FastAPI Example: Ejemplo FastAPI
             Flask Example: Ejemplo Flask
@@ -35,6 +40,8 @@ plugins:
 nav:
   - Home: index.md
   - Wiki Generator: wiki-generation.md
+  - Contributing: contributing.md
+  - PyPI Publishing: pypi-publishing.md
   - Django Example: django-example.md
   - FastAPI Example: fastapi-example.md
   - Flask Example: flask-example.md

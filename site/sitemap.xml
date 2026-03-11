@@ -1,73 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
-        <loc>https://example.com/pagopar-sdk/</loc>
+        <loc>https://devpbeat.github.io/pagopar-sdk/</loc>
         <lastmod>2026-03-11</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://devpbeat.github.io/pagopar-sdk/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://devpbeat.github.io/pagopar-sdk/es/"/>
     </url>
     <url>
-        <loc>https://example.com/pagopar-sdk/django-example/</loc>
+        <loc>https://devpbeat.github.io/pagopar-sdk/contributing/</loc>
         <lastmod>2026-03-11</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/django-example/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/django-example/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://devpbeat.github.io/pagopar-sdk/contributing/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://devpbeat.github.io/pagopar-sdk/es/contributing/"/>
     </url>
     <url>
-        <loc>https://example.com/pagopar-sdk/fastapi-example/</loc>
+        <loc>https://devpbeat.github.io/pagopar-sdk/django-example/</loc>
         <lastmod>2026-03-11</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/fastapi-example/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/fastapi-example/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://devpbeat.github.io/pagopar-sdk/django-example/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://devpbeat.github.io/pagopar-sdk/es/django-example/"/>
     </url>
     <url>
-        <loc>https://example.com/pagopar-sdk/flask-example/</loc>
+        <loc>https://devpbeat.github.io/pagopar-sdk/fastapi-example/</loc>
         <lastmod>2026-03-11</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/flask-example/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/flask-example/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://devpbeat.github.io/pagopar-sdk/fastapi-example/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://devpbeat.github.io/pagopar-sdk/es/fastapi-example/"/>
     </url>
     <url>
-        <loc>https://example.com/pagopar-sdk/wiki-generation/</loc>
+        <loc>https://devpbeat.github.io/pagopar-sdk/flask-example/</loc>
         <lastmod>2026-03-11</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/wiki-generation/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/wiki-generation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://devpbeat.github.io/pagopar-sdk/flask-example/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://devpbeat.github.io/pagopar-sdk/es/flask-example/"/>
     </url>
     <url>
-        <loc>https://example.com/pagopar-sdk/es/</loc>
+        <loc>https://devpbeat.github.io/pagopar-sdk/pypi-publishing/</loc>
         <lastmod>2026-03-11</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://devpbeat.github.io/pagopar-sdk/pypi-publishing/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://devpbeat.github.io/pagopar-sdk/es/pypi-publishing/"/>
     </url>
     <url>
-        <loc>https://example.com/pagopar-sdk/es/django-example/</loc>
+        <loc>https://devpbeat.github.io/pagopar-sdk/wiki-generation/</loc>
         <lastmod>2026-03-11</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/django-example/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/django-example/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://devpbeat.github.io/pagopar-sdk/wiki-generation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://devpbeat.github.io/pagopar-sdk/es/wiki-generation/"/>
     </url>
     <url>
-        <loc>https://example.com/pagopar-sdk/es/fastapi-example/</loc>
+        <loc>https://devpbeat.github.io/pagopar-sdk/es/</loc>
         <lastmod>2026-03-11</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/fastapi-example/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/fastapi-example/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://devpbeat.github.io/pagopar-sdk/es/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://devpbeat.github.io/pagopar-sdk/"/>
     </url>
     <url>
-        <loc>https://example.com/pagopar-sdk/es/flask-example/</loc>
+        <loc>https://devpbeat.github.io/pagopar-sdk/es/contributing/</loc>
         <lastmod>2026-03-11</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/flask-example/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/flask-example/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://devpbeat.github.io/pagopar-sdk/es/contributing/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://devpbeat.github.io/pagopar-sdk/contributing/"/>
     </url>
     <url>
-        <loc>https://example.com/pagopar-sdk/es/wiki-generation/</loc>
+        <loc>https://devpbeat.github.io/pagopar-sdk/es/django-example/</loc>
         <lastmod>2026-03-11</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/wiki-generation/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/wiki-generation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://devpbeat.github.io/pagopar-sdk/es/django-example/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://devpbeat.github.io/pagopar-sdk/django-example/"/>
+    </url>
+    <url>
+        <loc>https://devpbeat.github.io/pagopar-sdk/es/fastapi-example/</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://devpbeat.github.io/pagopar-sdk/es/fastapi-example/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://devpbeat.github.io/pagopar-sdk/fastapi-example/"/>
+    </url>
+    <url>
+        <loc>https://devpbeat.github.io/pagopar-sdk/es/flask-example/</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://devpbeat.github.io/pagopar-sdk/es/flask-example/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://devpbeat.github.io/pagopar-sdk/flask-example/"/>
+    </url>
+    <url>
+        <loc>https://devpbeat.github.io/pagopar-sdk/es/pypi-publishing/</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://devpbeat.github.io/pagopar-sdk/es/pypi-publishing/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://devpbeat.github.io/pagopar-sdk/pypi-publishing/"/>
+    </url>
+    <url>
+        <loc>https://devpbeat.github.io/pagopar-sdk/es/wiki-generation/</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://devpbeat.github.io/pagopar-sdk/es/wiki-generation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://devpbeat.github.io/pagopar-sdk/wiki-generation/"/>
     </url>
 </urlset>

@@ -2,14 +2,14 @@
 
 ## Herramienta recomendada
 
-Para este SDK, conviene usar **MkDocs + Material for MkDocs**.
+Para este SDK, conviene usar **MkDocs** con el tema incorporado.
 
 Motivos:
 
 - Flujo centrado en Markdown (`.md` para todo el contenido)
 - Vista previa local rápida
 - Publicación sencilla en GitHub Pages
-- Buena navegación y búsqueda para documentación técnica
+- Configuración simple y estable, con menos dependencias externas
 
 ## Comandos
 

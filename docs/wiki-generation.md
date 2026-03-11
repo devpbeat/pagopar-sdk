@@ -2,14 +2,14 @@
 
 ## Recommended tool
 
-For this SDK, use **MkDocs + Material for MkDocs**.
+For this SDK, use **MkDocs** with its built-in theme.
 
 Why this is a good fit:
 
 - Markdown-first workflow (`.md` files only for content)
 - Fast local preview
 - Easy publish to GitHub Pages
-- Good navigation/search for technical docs
+- Simple, stable setup with fewer external dependencies
 
 ## Commands
 

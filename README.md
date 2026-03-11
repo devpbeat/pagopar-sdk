@@ -33,6 +33,11 @@ It can now be built in **English and Spanish**.
 
 - Wiki home: `docs/index.md`
 - Spanish wiki home: `docs/es/index.md`
+- Contributing guide: `CONTRIBUTING.md`
+- Wiki contributing guide: `docs/contributing.md`
+- Spanish wiki contributing guide: `docs/es/contributing.md`
+- PyPI publishing guide: `docs/pypi-publishing.md`
+- Spanish PyPI publishing guide: `docs/es/pypi-publishing.md`
 - Django implementation: `docs/django-example.md`
 - Spanish Django implementation: `docs/es/django-example.md`
 - FastAPI implementation: `docs/fastapi-example.md`
