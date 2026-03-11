@@ -1,0 +1,1566 @@
+{
+  "info": {
+    "_postman_id": "ac46cd2e-9fe3-449d-b0d5-a2f9361518fb",
+    "name": "Catastro de tarjetas - Pagos recurrentes - Preautorización",
+    "description": "## **Primeros pasos**  \n\nLa funcionalidad de pagos recurrentes a través de Pagopar permite realizar un pago en cualquier momento, de una tarjeta de crédito/débito previamente catastrada/guardada por el usuario.\n\nPara poder pagar o eliminar una tarjeta, por seguridad se utiliza tokens temporales, por tanto, primero se debe listar las tarjeta de un usuario, seleccionar utilizando ese token temporal y luego decidir si se va a abonar utlizando dicha tarjeta, u otra acción, como eliminar la tarjeta, siempre utilizando ese token temporal.  \n\nEsta funcionalidad permite el catastro y posterior pago de una transacción con una tarjeta previamente catastrada utilizando dos proveedores: Bancard y uPay. EndFragment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "11717538"
+  },
+  "item": [
+    {
+      "name": "Agregar Cliente",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Obtén la clave privada de las variables globales\r",
+              "var privateKey = pm.globals.get(\"private_key\");\r",
+              "\r",
+              "// Define el texto a concatenar\r",
+              "var text = \"PAGO-RECURRENTE\";\r",
+              "\r",
+              "// Concatenar la clave privada con el texto\r",
+              "var concatenatedString = privateKey + text;\r",
+              "\r",
+              "// Generar el hash SHA1 de la cadena concatenada\r",
+              "var sha1 = CryptoJS.SHA1(concatenatedString);\r",
+              "\r",
+              "// Convertir el hash a una cadena hexadecimal\r",
+              "var tokenPagoRecurrente = sha1.toString(CryptoJS.enc.Hex);\r",
+              "\r",
+              "// Guardar el token generado en una variable de entorno\r",
+              "pm.environment.set(\"tokenPagoRecurrente\", tokenPagoRecurrente);"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"token\": \"{{tokenPagoRecurrente}}\",\r\n  \"token_publico\": \"{{public_key}}\",\r\n   \"identificador\": 1,\r\n   \"nombre_apellido\": \"Mikhail Szwako\",\r\n   \"email\": \"mihares@gmail.com\",\r\n   \"celular\": \"0981252238\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/agregar-cliente/",
+          "protocol": "https",
+          "host": [
+            "api",
+            "pagopar",
+            "com"
+          ],
+          "path": [
+            "api",
+            "pago-recurrente",
+            "3.0",
+            "agregar-cliente",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Procesado correctamente",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"token\": \"2e2dc08bf16e4cc8334bfb9815043a7dace65a05\",\r\n  \"token_publico\": \"ebcad4d95e229113a4e871cb491fbcfb\",\r\n   \"identificador\": 1,\r\n   \"nombre_apellido\": \"Mikhail Szwako\",\r\n   \"email\": \"mihares@gmail.com\",\r\n   \"celular\": \"0981252238\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/agregar-cliente/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "pagopar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "pago-recurrente",
+                "3.0",
+                "agregar-cliente",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Mon, 08 Jul 2024 19:27:09 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "Apache"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Expires",
+              "value": "Thu, 19 Nov 1981 08:52:00 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding,User-Agent"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "gzip"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "frame-ancestors 'self' https://devportalpy.mitic.gov.py https://devpagos.mitic.gov.py https://www.paraguay.gov.py https://pagos.paraguay.gov.py https://centinelapistag.cardinalcommerce.com https://centinelapi.cardinalcommerce.com *.cardinalcommerce.com https://testflex.cybersource.com https://flex.cybersource.com https://portal.uninorte.edu.py/"
+            },
+            {
+              "key": "Content-Length",
+              "value": "140"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=2, max=100"
+            },
+            {
+              "key": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"respuesta\": true,\n    \"resultado\": {\n        \"id_comprador_comercio\": \"1\",\n        \"nombres_apellidos\": \"Mikhail Szwako\",\n        \"email\": \"mihares@gmail.com\",\n        \"celular\": \"0981252238\"\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Agregar Tarjeta",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Obtén la clave privada de las variables globales\r",
+              "var privateKey = pm.globals.get(\"private_key\");\r",
+              "\r",
+              "// Define el texto a concatenar\r",
+              "var text = \"PAGO-RECURRENTE\";\r",
+              "\r",
+              "// Concatenar la clave privada con el texto\r",
+              "var concatenatedString = privateKey + text;\r",
+              "\r",
+              "// Generar el hash SHA1 de la cadena concatenada\r",
+              "var sha1 = CryptoJS.SHA1(concatenatedString);\r",
+              "\r",
+              "// Convertir el hash a una cadena hexadecimal\r",
+              "var tokenPagoRecurrente = sha1.toString(CryptoJS.enc.Hex);\r",
+              "\r",
+              "// Guardar el token generado en una variable de entorno\r",
+              "pm.environment.set(\"tokenPagoRecurrente\", tokenPagoRecurrente);"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"token\": \"{{tokenPagoRecurrente}}\",\r\n  \"token_publico\": \"{{public_key}}\",\r\n  \"url\": \"https://www.misitioejemplo.com.py/checkout\",\r\n  \"proveedor\": \"Bancard\",\r\n  \"identificador\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/agregar-tarjeta/",
+          "protocol": "https",
+          "host": [
+            "api",
+            "pagopar",
+            "com"
+          ],
+          "path": [
+            "api",
+            "pago-recurrente",
+            "3.0",
+            "agregar-tarjeta",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Procesado correctamente",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"token\": \"2e2dc08bf16e4cc8334bfb9815043a7dace65a05\",\r\n  \"token_publico\": \"ebcad4d95e229113a4e871cb491fbcfb\",\r\n  \"url\": \"https://www.misitioejemplo.com.py/checkout\",\r\n  \"proveedor\": \"Bancard\",\r\n  \"identificador\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/agregar-tarjeta/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "pagopar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "pago-recurrente",
+                "3.0",
+                "agregar-tarjeta",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Mon, 08 Jul 2024 19:29:06 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "Apache"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Expires",
+              "value": "Thu, 19 Nov 1981 08:52:00 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Vary",
+              "value": "User-Agent"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "frame-ancestors 'self' https://devportalpy.mitic.gov.py https://devpagos.mitic.gov.py https://www.paraguay.gov.py https://pagos.paraguay.gov.py https://centinelapistag.cardinalcommerce.com https://centinelapi.cardinalcommerce.com *.cardinalcommerce.com https://testflex.cybersource.com https://flex.cybersource.com https://portal.uninorte.edu.py/"
+            },
+            {
+              "key": "Content-Length",
+              "value": "53"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=2, max=100"
+            },
+            {
+              "key": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"respuesta\": true,\n    \"resultado\": \"L3b_H.c_4He9w7KJzX-*\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Listar tarjetas",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Obtén la clave privada de las variables globales\r",
+              "var privateKey = pm.globals.get(\"private_key\");\r",
+              "\r",
+              "// Define el texto a concatenar\r",
+              "var text = \"PAGO-RECURRENTE\";\r",
+              "\r",
+              "// Concatenar la clave privada con el texto\r",
+              "var concatenatedString = privateKey + text;\r",
+              "\r",
+              "// Generar el hash SHA1 de la cadena concatenada\r",
+              "var sha1 = CryptoJS.SHA1(concatenatedString);\r",
+              "\r",
+              "// Convertir el hash a una cadena hexadecimal\r",
+              "var tokenPagoRecurrente = sha1.toString(CryptoJS.enc.Hex);\r",
+              "\r",
+              "// Guardar el token generado en una variable de entorno\r",
+              "pm.environment.set(\"tokenPagoRecurrente\", tokenPagoRecurrente);"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"token\": \"{{tokenPagoRecurrente}}\",\r\n  \"token_publico\": \"{{public_key}}\",\r\n  \"identificador\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/listar-tarjeta/",
+          "protocol": "https",
+          "host": [
+            "api",
+            "pagopar",
+            "com"
+          ],
+          "path": [
+            "api",
+            "pago-recurrente",
+            "3.0",
+            "listar-tarjeta",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Procesado correctamente",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"token\": \"2e2dc08bf16e4cc8334bfb9815043a7dace65a05\",\r\n  \"token_publico\": \"ebcad4d95e229113a4e871cb491fbcfb\",\r\n  \"identificador\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/listar-tarjeta/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "pagopar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "pago-recurrente",
+                "3.0",
+                "listar-tarjeta",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Tue, 09 Jul 2024 13:22:46 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "Apache"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Expires",
+              "value": "Thu, 19 Nov 1981 08:52:00 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding,User-Agent"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "gzip"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "frame-ancestors 'self' https://devportalpy.mitic.gov.py https://devpagos.mitic.gov.py https://www.paraguay.gov.py https://pagos.paraguay.gov.py https://centinelapistag.cardinalcommerce.com https://centinelapi.cardinalcommerce.com *.cardinalcommerce.com https://testflex.cybersource.com https://flex.cybersource.com https://portal.uninorte.edu.py/"
+            },
+            {
+              "key": "Content-Length",
+              "value": "460"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=2, max=100"
+            },
+            {
+              "key": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"respuesta\": true,\n    \"resultado\": [\n        {\n            \"tarjeta\": \"1\",\n            \"url_logo\": \"https://cdn.pagopar.com/assets/images/card-payment/visa.png?0.20240418\",\n            \"tarjeta_numero\": \"457572******3607\",\n            \"descripcion\": \"VISA - PREPAGA - VISION BCO.\",\n            \"tipo_tarjeta\": \"Crédito\",\n            \"alias_token\": \"108f3a762908183156ec76ca1f1ebcf72897107f0a62efa7ea5548a0e4440fe6\"\n        },\n        {\n            \"tarjeta\": \"64\",\n            \"url_logo\": \"https://cdn.pagopar.com/assets/images/card-payment/visa.png?0.20240418\",\n            \"tarjeta_numero\": \"404384******1400\",\n            \"descripcion\": \"VISA - CLASICA - BCO. ATLAS S.A.\",\n            \"tipo_tarjeta\": \"Crédito\",\n            \"alias_token\": \"55ba70c870a5639dc1fee0bfef9b4128e75f4b5882908d71506fbb1058a9abd6\"\n        },\n        {\n            \"tarjeta\": \"77\",\n            \"url_logo\": \"https://cdn.pagopar.com/assets/images/card-payment/mastercard.png?0.20240418\",\n            \"tarjeta_numero\": \"546698******4128\",\n            \"descripcion\": \"MASTERCARD - BLACK - BANCO ITAU PY\",\n            \"tipo_tarjeta\": \"Crédito\",\n            \"alias_token\": \"3a3ce37d047c4c079c307d8b4198f88bd51406ee8b32ea0d419c577fd9f9ac6e\"\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Confirmar tarjeta",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Obtén la clave privada de las variables globales\r",
+              "var privateKey = pm.globals.get(\"private_key\");\r",
+              "\r",
+              "// Define el texto a concatenar\r",
+              "var text = \"PAGO-RECURRENTE\";\r",
+              "\r",
+              "// Concatenar la clave privada con el texto\r",
+              "var concatenatedString = privateKey + text;\r",
+              "\r",
+              "// Generar el hash SHA1 de la cadena concatenada\r",
+              "var sha1 = CryptoJS.SHA1(concatenatedString);\r",
+              "\r",
+              "// Convertir el hash a una cadena hexadecimal\r",
+              "var tokenPagoRecurrente = sha1.toString(CryptoJS.enc.Hex);\r",
+              "\r",
+              "// Guardar el token generado en una variable de entorno\r",
+              "pm.environment.set(\"tokenPagoRecurrente\", tokenPagoRecurrente);"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"token\": \"{{tokenPagoRecurrente}}\",\r\n  \"token_publico\": \"{{public_key}}\",\r\n  \"url\": \"https://www.misitioejemplo.com.py/checkout\",\r\n  \"identificador\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/confirmar-tarjeta/",
+          "protocol": "https",
+          "host": [
+            "api",
+            "pagopar",
+            "com"
+          ],
+          "path": [
+            "api",
+            "pago-recurrente",
+            "3.0",
+            "confirmar-tarjeta",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Procesado correctamente",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"token\": \"2e2dc08bf16e4cc8334bfb9815043a7dace65a05\",\r\n  \"token_publico\": \"ebcad4d95e229113a4e871cb491fbcfb\",\r\n  \"url\": \"https://www.misitioejemplo.com.py/checkout\",\r\n  \"identificador\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/confirmar-tarjeta/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "pagopar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "pago-recurrente",
+                "3.0",
+                "confirmar-tarjeta",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Mon, 08 Jul 2024 19:37:09 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "Apache"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Expires",
+              "value": "Thu, 19 Nov 1981 08:52:00 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Vary",
+              "value": "User-Agent"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "frame-ancestors 'self' https://devportalpy.mitic.gov.py https://devpagos.mitic.gov.py https://www.paraguay.gov.py https://pagos.paraguay.gov.py https://centinelapistag.cardinalcommerce.com https://centinelapi.cardinalcommerce.com *.cardinalcommerce.com https://testflex.cybersource.com https://flex.cybersource.com https://portal.uninorte.edu.py/"
+            },
+            {
+              "key": "Content-Length",
+              "value": "35"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=2, max=100"
+            },
+            {
+              "key": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"respuesta\": true,\n    \"resultado\": \"Ok\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Eliminar tarjeta",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Obtén la clave privada de las variables globales\r",
+              "var privateKey = pm.globals.get(\"private_key\");\r",
+              "\r",
+              "// Define el texto a concatenar\r",
+              "var text = \"PAGO-RECURRENTE\";\r",
+              "\r",
+              "// Concatenar la clave privada con el texto\r",
+              "var concatenatedString = privateKey + text;\r",
+              "\r",
+              "// Generar el hash SHA1 de la cadena concatenada\r",
+              "var sha1 = CryptoJS.SHA1(concatenatedString);\r",
+              "\r",
+              "// Convertir el hash a una cadena hexadecimal\r",
+              "var tokenPagoRecurrente = sha1.toString(CryptoJS.enc.Hex);\r",
+              "\r",
+              "// Guardar el token generado en una variable de entorno\r",
+              "pm.environment.set(\"tokenPagoRecurrente\", tokenPagoRecurrente);"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"token\": \"{{tokenPagoRecurrente}}\",\r\n  \"token_publico\": \"{{public_key}}\",\r\n  \"tarjeta\": \"293b38c39272b5ab5d3e3f4791e2ef34fa8ea5ff\",\r\n  \"identificador\": 1\r\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/eliminar-tarjeta/",
+          "protocol": "https",
+          "host": [
+            "api",
+            "pagopar",
+            "com"
+          ],
+          "path": [
+            "api",
+            "pago-recurrente",
+            "3.0",
+            "eliminar-tarjeta",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Procesado correctamente",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"token\": \"{{tokenPagoRecurrente}}\",\r\n  \"token_publico\": \"{{public_key}}\",\r\n  \"tarjeta\": \"4f4b4e8eab18e48948f6d777dc09664c2f869d4fbcab21fabf92bc99c70a2d8d\",\r\n  \"identificador\": 1\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/eliminar-tarjeta/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "pagopar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "pago-recurrente",
+                "3.0",
+                "eliminar-tarjeta",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jul 2024 15:28:42 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "Apache"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Expires",
+              "value": "Thu, 19 Nov 1981 08:52:00 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Vary",
+              "value": "User-Agent"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "frame-ancestors 'self' https://devportalpy.mitic.gov.py https://devpagos.mitic.gov.py https://www.paraguay.gov.py https://pagos.paraguay.gov.py https://centinelapistag.cardinalcommerce.com https://centinelapi.cardinalcommerce.com *.cardinalcommerce.com https://testflex.cybersource.com https://flex.cybersource.com https://portal.uninorte.edu.py/"
+            },
+            {
+              "key": "Content-Length",
+              "value": "40"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=2, max=100"
+            },
+            {
+              "key": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"respuesta\": true,\n    \"resultado\": \"Borrado\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Pagar - Débito sin Pre autorización",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Obtén la clave privada de las variables globales\r",
+              "var privateKey = pm.globals.get(\"private_key\");\r",
+              "\r",
+              "// Define el texto a concatenar\r",
+              "var text = \"PAGO-RECURRENTE\";\r",
+              "\r",
+              "// Concatenar la clave privada con el texto\r",
+              "var concatenatedString = privateKey + text;\r",
+              "\r",
+              "// Generar el hash SHA1 de la cadena concatenada\r",
+              "var sha1 = CryptoJS.SHA1(concatenatedString);\r",
+              "\r",
+              "// Convertir el hash a una cadena hexadecimal\r",
+              "var tokenPagoRecurrente = sha1.toString(CryptoJS.enc.Hex);\r",
+              "\r",
+              "// Guardar el token generado en una variable de entorno\r",
+              "pm.environment.set(\"tokenPagoRecurrente\", tokenPagoRecurrente);"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"token\": \"{{tokenPagoRecurrente}}\",\r\n  \"token_publico\": \"{{public_key}}\",\r\n  \"hash_pedido\": \"b5e1052152f64c0c4bfd7762489598320429df7832d718990de045d00f406646\",\r\n  \"tarjeta\": \"293b38c39272b5ab5d3e3f4791e2ef34fa8ea5ff\",\r\n  \"identificador\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/pagar/",
+          "protocol": "https",
+          "host": [
+            "api",
+            "pagopar",
+            "com"
+          ],
+          "path": [
+            "api",
+            "pago-recurrente",
+            "3.0",
+            "pagar",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Procesado con error",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"token\": \"2e2dc08bf16e4cc8334bfb9815043a7dace65a05\",\r\n  \"token_publico\": \"ebcad4d95e229113a4e871cb491fbcfb\",\r\n  \"hash_pedido\": \"438af751ff62c43d62773aa0a3d1eb8fdc7b57b46488a978cbdaf8091c03c994\",\r\n  \"tarjeta\": \"ed7c095d38df1bb7a588344a32216e9724ff0dc0c0c70e1a8093fff4e1bdb996\",\r\n  \"identificador\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/pagar/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "pagopar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "pago-recurrente",
+                "3.0",
+                "pagar",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Mon, 08 Jul 2024 19:57:51 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "Apache"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Expires",
+              "value": "Thu, 19 Nov 1981 08:52:00 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Vary",
+              "value": "User-Agent"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "frame-ancestors 'self' https://devportalpy.mitic.gov.py https://devpagos.mitic.gov.py https://www.paraguay.gov.py https://pagos.paraguay.gov.py https://centinelapistag.cardinalcommerce.com https://centinelapi.cardinalcommerce.com *.cardinalcommerce.com https://testflex.cybersource.com https://flex.cybersource.com https://portal.uninorte.edu.py/"
+            },
+            {
+              "key": "Content-Length",
+              "value": "64"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=2, max=100"
+            },
+            {
+              "key": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"respuesta\": false,\n    \"resultado\": \"Selecciona una tarjeta valida.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Preautorizar",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Obtén la clave privada de las variables globales\r",
+              "var privateKey = pm.globals.get(\"private_key\");\r",
+              "\r",
+              "// Define el texto a concatenar\r",
+              "var text = \"PAGO-RECURRENTE\";\r",
+              "\r",
+              "// Concatenar la clave privada con el texto\r",
+              "var concatenatedString = privateKey + text;\r",
+              "\r",
+              "// Generar el hash SHA1 de la cadena concatenada\r",
+              "var sha1 = CryptoJS.SHA1(concatenatedString);\r",
+              "\r",
+              "// Convertir el hash a una cadena hexadecimal\r",
+              "var tokenPagoRecurrente = sha1.toString(CryptoJS.enc.Hex);\r",
+              "\r",
+              "// Guardar el token generado en una variable de entorno\r",
+              "pm.environment.set(\"tokenPagoRecurrente\", tokenPagoRecurrente);"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"token\": \"{{tokenPagoRecurrente}}\",\r\n    \"token_publico\": \"{{public_key}}\",\r\n    \"tarjeta\": 5,\r\n    \"monto\": 1000,\r\n    \"descripcion\": \"Monto ejemplo\",\r\n    \"id_transaccion\": 17,\r\n    \"identificador\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/preautorizar/",
+          "protocol": "https",
+          "host": [
+            "api",
+            "pagopar",
+            "com"
+          ],
+          "path": [
+            "api",
+            "pago-recurrente",
+            "3.0",
+            "preautorizar",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Procesado con error",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"token\": \"2e2dc08bf16e4cc8334bfb9815043a7dace65a05\",\r\n    \"token_publico\": \"ebcad4d95e229113a4e871cb491fbcfb\",\r\n    \"tarjeta\": \"0e18c44ffd0e6c82f95430dadde73e34827688dd16b5b6f58fd952aa9f95ca9c\",\r\n    \"monto\": 1000,\r\n    \"descripcion\": \"Monto ejemplo\",\r\n    \"id_transaccion\": 1,\r\n    \"identificador\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/preautorizar/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "pagopar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "pago-recurrente",
+                "3.0",
+                "preautorizar",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Mon, 08 Jul 2024 23:30:29 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "Apache"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Expires",
+              "value": "Thu, 19 Nov 1981 08:52:00 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding,User-Agent"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "gzip"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "frame-ancestors 'self' https://devportalpy.mitic.gov.py https://devpagos.mitic.gov.py https://www.paraguay.gov.py https://pagos.paraguay.gov.py https://centinelapistag.cardinalcommerce.com https://centinelapi.cardinalcommerce.com *.cardinalcommerce.com https://testflex.cybersource.com https://flex.cybersource.com https://portal.uninorte.edu.py/"
+            },
+            {
+              "key": "Content-Length",
+              "value": "102"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=2, max=100"
+            },
+            {
+              "key": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"respuesta\": false,\n    \"resultado\": \"Selecciona una tarjeta valida.\",\n    \"json\": null,\n    \"estado\": null,\n    \"error\": null\n}"
+        },
+        {
+          "name": "Procesado satisfactoriamente",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"token\": \"2e2dc08bf16e4cc8334bfb9815043a7dace65a05\",\r\n    \"token_publico\": \"ebcad4d95e229113a4e871cb491fbcfb\",\r\n    \"tarjeta\": 77,\r\n    \"monto\": 1000,\r\n    \"descripcion\": \"Monto ejemplo\",\r\n    \"id_transaccion\": 4,\r\n    \"identificador\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/preautorizar/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "pagopar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "pago-recurrente",
+                "3.0",
+                "preautorizar",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Tue, 09 Jul 2024 14:06:53 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "Apache"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Expires",
+              "value": "Thu, 19 Nov 1981 08:52:00 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding,User-Agent"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "gzip"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "frame-ancestors 'self' https://devportalpy.mitic.gov.py https://devpagos.mitic.gov.py https://www.paraguay.gov.py https://pagos.paraguay.gov.py https://centinelapistag.cardinalcommerce.com https://centinelapi.cardinalcommerce.com *.cardinalcommerce.com https://testflex.cybersource.com https://flex.cybersource.com https://portal.uninorte.edu.py/"
+            },
+            {
+              "key": "Content-Length",
+              "value": "103"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=2, max=100"
+            },
+            {
+              "key": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"respuesta\": true,\n    \"resultado\": {\n        \"transaccion\": \"8302771\",\n        \"comprobante_interno\": \"3926505331\"\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Confirmar pre autorizacion",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Obtén la clave privada de las variables globales\r",
+              "var privateKey = pm.globals.get(\"private_key\");\r",
+              "\r",
+              "// Define el texto a concatenar\r",
+              "var text = \"PAGO-RECURRENTE\";\r",
+              "\r",
+              "// Concatenar la clave privada con el texto\r",
+              "var concatenatedString = privateKey + text;\r",
+              "\r",
+              "// Generar el hash SHA1 de la cadena concatenada\r",
+              "var sha1 = CryptoJS.SHA1(concatenatedString);\r",
+              "\r",
+              "// Convertir el hash a una cadena hexadecimal\r",
+              "var tokenPagoRecurrente = sha1.toString(CryptoJS.enc.Hex);\r",
+              "\r",
+              "// Guardar el token generado en una variable de entorno\r",
+              "pm.environment.set(\"tokenPagoRecurrente\", tokenPagoRecurrente);"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"token\": \"{{tokenPagoRecurrente}}\",\r\n    \"token_publico\": \"{{public_key}}\",\r\n    \"hash_pedido\": \"0b2779188e8a0ba9b01c8c0010d7edb69f35fd0375178a71874f3c4b0140c0cd\",\r\n    \"transaccion\": 8330907,\r\n    \"id_transaccion\": 16,\r\n    \"identificador\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/confirmar-preautorizacion/",
+          "protocol": "https",
+          "host": [
+            "api",
+            "pagopar",
+            "com"
+          ],
+          "path": [
+            "api",
+            "pago-recurrente",
+            "3.0",
+            "confirmar-preautorizacion",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Procesado con error",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"token\": \"2e2dc08bf16e4cc8334bfb9815043a7dace65a05\",\r\n    \"token_publico\": \"ebcad4d95e229113a4e871cb491fbcfb\",\r\n    \"hash_pedido\": \"c36349585b0fead01b6cfa44848e9e11409e637aef31286a77beeb7ccd173454\",\r\n    \"transaccion\": 8302771,\r\n    \"id_transaccion\": 4,\r\n    \"identificador\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/confirmar-preautorizacion/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "pagopar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "pago-recurrente",
+                "3.0",
+                "confirmar-preautorizacion",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Tue, 09 Jul 2024 14:20:09 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "Apache"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Expires",
+              "value": "Thu, 19 Nov 1981 08:52:00 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept-Encoding,User-Agent"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "gzip"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "frame-ancestors 'self' https://devportalpy.mitic.gov.py https://devpagos.mitic.gov.py https://www.paraguay.gov.py https://pagos.paraguay.gov.py https://centinelapistag.cardinalcommerce.com https://centinelapi.cardinalcommerce.com *.cardinalcommerce.com https://testflex.cybersource.com https://flex.cybersource.com https://portal.uninorte.edu.py/"
+            },
+            {
+              "key": "Content-Length",
+              "value": "98"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=2, max=100"
+            },
+            {
+              "key": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"respuesta\": false,\n    \"resultado\": \"Pedido no existe, vencido o no corresponde al mismo comercio.\"\n}"
+        },
+        {
+          "name": "Procesado satisfactoriamente",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"token\": \"2e2dc08bf16e4cc8334bfb9815043a7dace65a05\",\r\n    \"token_publico\": \"ebcad4d95e229113a4e871cb491fbcfb\",\r\n    \"hash_pedido\": \"963597871eda295504b194b40c7828b448548d0772e936f429cb48b04d69dd72\",\r\n    \"transaccion\": 8303287,\r\n    \"id_transaccion\": 14,\r\n    \"identificador\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/confirmar-preautorizacion/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "pagopar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "pago-recurrente",
+                "3.0",
+                "confirmar-preautorizacion",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Tue, 09 Jul 2024 14:56:19 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "Apache"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Expires",
+              "value": "Thu, 19 Nov 1981 08:52:00 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Vary",
+              "value": "User-Agent"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "frame-ancestors 'self' https://devportalpy.mitic.gov.py https://devpagos.mitic.gov.py https://www.paraguay.gov.py https://pagos.paraguay.gov.py https://centinelapistag.cardinalcommerce.com https://centinelapi.cardinalcommerce.com *.cardinalcommerce.com https://testflex.cybersource.com https://flex.cybersource.com https://portal.uninorte.edu.py/"
+            },
+            {
+              "key": "Content-Length",
+              "value": "18"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=2, max=100"
+            },
+            {
+              "key": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"respuesta\": true\n}"
+        }
+      ]
+    },
+    {
+      "name": "Cancelar pre autorizacion",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Obtén la clave privada de las variables globales\r",
+              "var privateKey = pm.globals.get(\"private_key\");\r",
+              "\r",
+              "// Define el texto a concatenar\r",
+              "var text = \"PAGO-RECURRENTE\";\r",
+              "\r",
+              "// Concatenar la clave privada con el texto\r",
+              "var concatenatedString = privateKey + text;\r",
+              "\r",
+              "// Generar el hash SHA1 de la cadena concatenada\r",
+              "var sha1 = CryptoJS.SHA1(concatenatedString);\r",
+              "\r",
+              "// Convertir el hash a una cadena hexadecimal\r",
+              "var tokenPagoRecurrente = sha1.toString(CryptoJS.enc.Hex);\r",
+              "\r",
+              "// Guardar el token generado en una variable de entorno\r",
+              "pm.environment.set(\"tokenPagoRecurrente\", tokenPagoRecurrente);"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"token\": \"{{tokenPagoRecurrente}}\",\r\n    \"token_publico\": \"{{public_key}}\",\r\n    \"transaccion\": 8330993,\r\n    \"id_transaccion\": 17,\r\n    \"identificador\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/cancelar-preautorizacion/",
+          "protocol": "https",
+          "host": [
+            "api",
+            "pagopar",
+            "com"
+          ],
+          "path": [
+            "api",
+            "pago-recurrente",
+            "3.0",
+            "cancelar-preautorizacion",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Procesado satisfactoriamente",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"token\": \"2e2dc08bf16e4cc8334bfb9815043a7dace65a05\",\r\n    \"token_publico\": \"ebcad4d95e229113a4e871cb491fbcfb\",\r\n    \"transaccion\": 8299761,\r\n    \"id_transaccion\": 1,\r\n    \"identificador\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.pagopar.com/api/pago-recurrente/3.0/cancelar-preautorizacion/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "pagopar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "pago-recurrente",
+                "3.0",
+                "cancelar-preautorizacion",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Tue, 09 Jul 2024 01:13:09 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "Apache"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Expires",
+              "value": "Thu, 19 Nov 1981 08:52:00 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Vary",
+              "value": "User-Agent"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "frame-ancestors 'self' https://devportalpy.mitic.gov.py https://devpagos.mitic.gov.py https://www.paraguay.gov.py https://pagos.paraguay.gov.py https://centinelapistag.cardinalcommerce.com https://centinelapi.cardinalcommerce.com *.cardinalcommerce.com https://testflex.cybersource.com https://flex.cybersource.com https://portal.uninorte.edu.py/"
+            },
+            {
+              "key": "Content-Length",
+              "value": "35"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=2, max=100"
+            },
+            {
+              "key": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"respuesta\": true,\n    \"resultado\": \"OK\"\n}"
+        }
+      ]
+    }
+  ]
+}

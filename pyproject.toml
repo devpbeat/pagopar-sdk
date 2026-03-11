@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling>=1.26.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pagopar-sdk"
+version = "0.1.0"
+description = "Typed Python SDK for Pagopar commerce and recurrent payment APIs"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+	"httpx>=0.27.0,<1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+	"pytest>=8.3.0",
+	"ruff>=0.12.0",
+]
+docs = [
+	"mkdocs>=1.6.0",
+	"mkdocs-material>=9.5.0",
+	"mkdocs-static-i18n>=1.2.3",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pagopar_sdk"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100

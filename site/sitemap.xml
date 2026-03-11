@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://example.com/pagopar-sdk/</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/"/>
+    </url>
+    <url>
+        <loc>https://example.com/pagopar-sdk/django-example/</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/django-example/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/django-example/"/>
+    </url>
+    <url>
+        <loc>https://example.com/pagopar-sdk/fastapi-example/</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/fastapi-example/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/fastapi-example/"/>
+    </url>
+    <url>
+        <loc>https://example.com/pagopar-sdk/flask-example/</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/flask-example/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/flask-example/"/>
+    </url>
+    <url>
+        <loc>https://example.com/pagopar-sdk/wiki-generation/</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/wiki-generation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/wiki-generation/"/>
+    </url>
+    <url>
+        <loc>https://example.com/pagopar-sdk/es/</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/"/>
+    </url>
+    <url>
+        <loc>https://example.com/pagopar-sdk/es/django-example/</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/django-example/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/django-example/"/>
+    </url>
+    <url>
+        <loc>https://example.com/pagopar-sdk/es/fastapi-example/</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/fastapi-example/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/fastapi-example/"/>
+    </url>
+    <url>
+        <loc>https://example.com/pagopar-sdk/es/flask-example/</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/flask-example/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/flask-example/"/>
+    </url>
+    <url>
+        <loc>https://example.com/pagopar-sdk/es/wiki-generation/</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://example.com/pagopar-sdk/es/wiki-generation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://example.com/pagopar-sdk/wiki-generation/"/>
+    </url>
+</urlset>

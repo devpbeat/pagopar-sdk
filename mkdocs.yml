@@ -1,0 +1,46 @@
+site_name: Pagopar SDK Wiki
+site_description: Documentation and framework integration guides for pagopar-sdk
+site_url: https://example.com/pagopar-sdk
+
+theme:
+  name: material
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: folder
+      fallback_to_default: true
+      reconfigure_material: true
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+          nav_translations:
+            Home: Home
+            Wiki Generator: Wiki Generator
+            Django Example: Django Example
+            FastAPI Example: FastAPI Example
+            Flask Example: Flask Example
+        - locale: es
+          name: Español
+          build: true
+          nav_translations:
+            Home: Inicio
+            Wiki Generator: Generación de Wiki
+            Django Example: Ejemplo Django
+            FastAPI Example: Ejemplo FastAPI
+            Flask Example: Ejemplo Flask
+
+nav:
+  - Home: index.md
+  - Wiki Generator: wiki-generation.md
+  - Django Example: django-example.md
+  - FastAPI Example: fastapi-example.md
+  - Flask Example: flask-example.md
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
