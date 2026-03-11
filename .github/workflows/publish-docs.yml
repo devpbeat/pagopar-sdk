@@ -36,9 +36,24 @@ jobs:
         run: uv run --extra docs mkdocs build
 
       - name: Configure Pages
+        id: configure_pages
+        uses: actions/configure-pages@v5
+        continue-on-error: true
+
+      - name: Enable Pages with admin token
+        id: enable_pages
+        if: steps.configure_pages.outcome == 'failure' && secrets.PAGES_ADMIN_TOKEN != ''
         uses: actions/configure-pages@v5
         with:
           enablement: true
+          token: ${{ secrets.PAGES_ADMIN_TOKEN }}
+
+      - name: Validate Pages setup
+        if: steps.configure_pages.outcome == 'failure' && steps.enable_pages.outcome != 'success'
+        run: |
+          echo "::error::GitHub Pages is not enabled and this workflow cannot enable it with GITHUB_TOKEN."
+          echo "::error::Either enable Pages in Settings > Pages with source 'GitHub Actions', or add a repo secret named PAGES_ADMIN_TOKEN (PAT with repo/pages permissions)."
+          exit 1
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
