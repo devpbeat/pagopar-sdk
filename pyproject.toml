@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pagopar-sdk"
-version = "0.1.0"
+version = "0.1.1"
 description = "Typed Python SDK for Pagopar commerce and recurrent payment APIs"
 readme = "README.md"
 requires-python = ">=3.10"

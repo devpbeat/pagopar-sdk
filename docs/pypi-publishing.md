@@ -1,43 +1,80 @@
 # Publishing to PyPI
 
-This project is already packaged with [pyproject.toml](https://github.com/devpbeat/pagopar-sdk/blob/main/pyproject.toml), so publishing to PyPI is straightforward.
+This project is packaged with [pyproject.toml](https://github.com/devpbeat/pagopar-sdk/blob/main/pyproject.toml)
+and publishes automatically to PyPI via GitHub Actions using
+**OIDC trusted publishing** — no long-lived API tokens needed.
 
-## Before publishing
+---
 
-Check these items first:
+## Automated release (primary path)
 
-1. Confirm the package name is available on PyPI.
-2. Bump the version in [pyproject.toml](https://github.com/devpbeat/pagopar-sdk/blob/main/pyproject.toml).
-3. Make sure [README.md](https://github.com/devpbeat/pagopar-sdk/blob/main/README.md) is ready, since it becomes the project description on PyPI.
+Pushing a version tag triggers the
+[publish-pypi.yml](https://github.com/devpbeat/pagopar-sdk/blob/main/.github/workflows/publish-pypi.yml)
+workflow, which:
 
-## 1) Build the package
+1. Builds the sdist and wheel with `uv build`
+2. Validates artifacts with `twine check`
+3. Publishes to PyPI via `pypa/gh-action-pypi-publish` using OIDC (no token required)
 
-From the project root:
+### Release steps
+
+```bash
+# 1. Bump version in pyproject.toml, commit
+git add pyproject.toml
+git commit -m "chore: bump version to x.y.z"
+
+# 2. Tag and push — this triggers the workflow
+git tag vx.y.z
+git push origin main --tags
+```
+
+The workflow runs on any tag matching `v*`. Monitor it at
+`https://github.com/devpbeat/pagopar-sdk/actions`.
+
+### One-time PyPI setup (already done)
+
+The repository's `pypi` environment must be configured with a trusted publisher
+in your PyPI project settings:
+
+- **Owner:** `devpbeat`
+- **Repository:** `pagopar-sdk`
+- **Workflow:** `publish-pypi.yml`
+- **Environment:** `pypi`
+
+---
+
+## Manual release (fallback)
+
+If you need to publish outside of CI:
+
+### 1) Build
 
 ```bash
 uv build
 ```
 
-This generates:
+Generates `dist/*.tar.gz` and `dist/*.whl`.
 
-- `dist/*.tar.gz`
-- `dist/*.whl`
-
-## 2) Validate the artifacts
+### 2) Validate
 
 ```bash
 uv tool run twine check dist/*
 ```
 
-## 3) Create a PyPI API token
+### 3) Publish to TestPyPI first (recommended)
 
-In PyPI:
+```bash
+uv tool run twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+```
 
-- Create an account
-- Generate an API token
-- Keep the token somewhere safe
+### 4) Publish to PyPI
 
-## 4) Publish manually from Windows PowerShell
+```bash
+uv tool run twine upload dist/*
+```
+
+You will be prompted for `__token__` as username and your PyPI API token as password.
+On Windows PowerShell you can set them as env vars to avoid the prompt:
 
 ```powershell
 $env:TWINE_USERNAME="__token__"
@@ -45,44 +82,22 @@ $env:TWINE_PASSWORD="pypi-xxxxxxxxxxxxxxxx"
 uv tool run twine upload dist/*
 ```
 
-## 5) Optional: publish to TestPyPI first
+---
 
-```powershell
-$env:TWINE_USERNAME="__token__"
-$env:TWINE_PASSWORD="pypi-xxxxxxxxxxxxxxxx"
-uv tool run twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-```
-
-## 6) Verify installation
+## Verify the release
 
 ```bash
 pip install pagopar-sdk
+# or pin a specific version
+pip install pagopar-sdk==x.y.z
 ```
 
-Or pin a version:
+---
 
-```bash
-pip install pagopar-sdk==0.1.0
-```
+## Pre-release checklist
 
-## Recommended release flow
-
-1. Update version in [pyproject.toml](https://github.com/devpbeat/pagopar-sdk/blob/main/pyproject.toml)
-2. Commit changes and tag the release
-3. Run `uv build`
-4. Run `uv tool run twine check dist/*`
-5. Upload to TestPyPI or PyPI
-
-## Recommended metadata improvements
-
-For a better PyPI page, consider adding these fields to [pyproject.toml](https://github.com/devpbeat/pagopar-sdk/blob/main/pyproject.toml):
-
-- `authors`
-- `license`
-- `classifiers`
-- `keywords`
-- `project.urls`
-
-## Optional next step: trusted publishing
-
-The best long-term setup is publishing from CI with PyPI trusted publishing instead of uploading manually with a token.
+- [ ] Version bumped in `pyproject.toml`
+- [ ] `CHANGELOG` / release notes updated
+- [ ] `README.md` accurate (it becomes the PyPI project description)
+- [ ] All tests passing on `main`
+- [ ] Tag matches version (`v0.2.0` → `version = "0.2.0"`)

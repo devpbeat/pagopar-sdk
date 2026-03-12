@@ -1,43 +1,80 @@
 # Publicar en PyPI
 
-Este proyecto ya está empaquetado con [pyproject.toml](https://github.com/devpbeat/pagopar-sdk/blob/main/pyproject.toml), así que publicarlo en PyPI es bastante directo.
+Este proyecto está empaquetado con [pyproject.toml](https://github.com/devpbeat/pagopar-sdk/blob/main/pyproject.toml)
+y se publica automáticamente en PyPI mediante GitHub Actions usando
+**OIDC trusted publishing** — sin tokens de larga duración.
 
-## Antes de publicar
+---
 
-Conviene revisar esto primero:
+## Release automatizado (camino principal)
 
-1. Confirmar que el nombre del paquete esté disponible en PyPI.
-2. Incrementar la versión en [pyproject.toml](https://github.com/devpbeat/pagopar-sdk/blob/main/pyproject.toml).
-3. Verificar que [README.md](https://github.com/devpbeat/pagopar-sdk/blob/main/README.md) esté listo, porque se usa como descripción del proyecto en PyPI.
+Hacer push de un tag de versión dispara el workflow
+[publish-pypi.yml](https://github.com/devpbeat/pagopar-sdk/blob/main/.github/workflows/publish-pypi.yml),
+que:
 
-## 1) Construir el paquete
+1. Construye el sdist y wheel con `uv build`
+2. Valida los artefactos con `twine check`
+3. Publica en PyPI vía `pypa/gh-action-pypi-publish` usando OIDC (sin token)
 
-Desde la raíz del proyecto:
+### Pasos de release
+
+```bash
+# 1. Bumpar versión en pyproject.toml y commitear
+git add pyproject.toml
+git commit -m "chore: bump version to x.y.z"
+
+# 2. Crear tag y hacer push — esto dispara el workflow
+git tag vx.y.z
+git push origin main --tags
+```
+
+El workflow corre con cualquier tag que empiece con `v*`. Se puede monitorear en
+`https://github.com/devpbeat/pagopar-sdk/actions`.
+
+### Configuración en PyPI (ya realizada)
+
+El environment `pypi` del repositorio debe tener configurado un trusted publisher
+en la configuración del proyecto en PyPI:
+
+- **Owner:** `devpbeat`
+- **Repository:** `pagopar-sdk`
+- **Workflow:** `publish-pypi.yml`
+- **Environment:** `pypi`
+
+---
+
+## Release manual (alternativa)
+
+Si se necesita publicar fuera de CI:
+
+### 1) Construir
 
 ```bash
 uv build
 ```
 
-Esto genera:
+Genera `dist/*.tar.gz` y `dist/*.whl`.
 
-- `dist/*.tar.gz`
-- `dist/*.whl`
-
-## 2) Validar los artefactos
+### 2) Validar
 
 ```bash
 uv tool run twine check dist/*
 ```
 
-## 3) Crear un token API de PyPI
+### 3) Publicar en TestPyPI primero (recomendado)
 
-En PyPI:
+```bash
+uv tool run twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+```
 
-- Crear una cuenta
-- Generar un API token
-- Guardarlo en un lugar seguro
+### 4) Publicar en PyPI
 
-## 4) Publicar manualmente desde Windows PowerShell
+```bash
+uv tool run twine upload dist/*
+```
+
+Se pedirá `__token__` como usuario y el API token de PyPI como contraseña.
+En Windows PowerShell se pueden setear como variables de entorno:
 
 ```powershell
 $env:TWINE_USERNAME="__token__"
@@ -45,44 +82,22 @@ $env:TWINE_PASSWORD="pypi-xxxxxxxxxxxxxxxx"
 uv tool run twine upload dist/*
 ```
 
-## 5) Opcional: publicar primero en TestPyPI
+---
 
-```powershell
-$env:TWINE_USERNAME="__token__"
-$env:TWINE_PASSWORD="pypi-xxxxxxxxxxxxxxxx"
-uv tool run twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-```
-
-## 6) Verificar instalación
+## Verificar el release
 
 ```bash
 pip install pagopar-sdk
+# o fijando versión
+pip install pagopar-sdk==x.y.z
 ```
 
-O fijando versión:
+---
 
-```bash
-pip install pagopar-sdk==0.1.0
-```
+## Checklist pre-release
 
-## Flujo recomendado de release
-
-1. Actualizar la versión en [pyproject.toml](https://github.com/devpbeat/pagopar-sdk/blob/main/pyproject.toml)
-2. Hacer commit y tag del release
-3. Ejecutar `uv build`
-4. Ejecutar `uv tool run twine check dist/*`
-5. Subir a TestPyPI o PyPI
-
-## Mejoras recomendadas de metadata
-
-Para una mejor página en PyPI, conviene agregar estos campos en [pyproject.toml](https://github.com/devpbeat/pagopar-sdk/blob/main/pyproject.toml):
-
-- `authors`
-- `license`
-- `classifiers`
-- `keywords`
-- `project.urls`
-
-## Siguiente mejora opcional: trusted publishing
-
-La mejor configuración a largo plazo es publicar desde CI con trusted publishing de PyPI, en lugar de subir manualmente con token.
+- [ ] Versión bumpeada en `pyproject.toml`
+- [ ] Release notes actualizadas
+- [ ] `README.md` al día (se usa como descripción del proyecto en PyPI)
+- [ ] Todos los tests pasando en `main`
+- [ ] El tag coincide con la versión (`v0.2.0` → `version = "0.2.0"`)
