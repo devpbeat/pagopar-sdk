@@ -2,6 +2,18 @@
 
 This example shows a clean service-oriented integration with `pagopar-sdk`.
 
+## Installation
+
+```bash
+pip install pagopar-sdk django
+```
+
+Or with uv:
+
+```bash
+uv add pagopar-sdk django
+```
+
 ## 1) Settings
 
 ```python

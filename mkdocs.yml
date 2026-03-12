@@ -19,32 +19,35 @@ plugins:
           build: true
           nav_translations:
             Home: Home
-            Wiki Generator: Wiki Generator
-            Contributing: Contributing
-            PyPI Publishing: PyPI Publishing
+            Installation: Installation
             Django Example: Django Example
             FastAPI Example: FastAPI Example
             Flask Example: Flask Example
+            Contributing: Contributing
+            PyPI Publishing: PyPI Publishing
+            Wiki Generator: Wiki Generator
         - locale: es
           name: Español
           build: true
           nav_translations:
             Home: Inicio
-            Wiki Generator: Generación de Wiki
-            Contributing: Contribuir
-            PyPI Publishing: Publicación en PyPI
+            Installation: Instalación
             Django Example: Ejemplo Django
             FastAPI Example: Ejemplo FastAPI
             Flask Example: Ejemplo Flask
+            Contributing: Contribuir
+            PyPI Publishing: Publicación en PyPI
+            Wiki Generator: Generación de Wiki
 
 nav:
   - Home: index.md
-  - Wiki Generator: wiki-generation.md
-  - Contributing: contributing.md
-  - PyPI Publishing: pypi-publishing.md
+  - Installation: installation.md
   - Django Example: django-example.md
   - FastAPI Example: fastapi-example.md
   - Flask Example: flask-example.md
+  - Contributing: contributing.md
+  - PyPI Publishing: pypi-publishing.md
+  - Wiki Generator: wiki-generation.md
 
 markdown_extensions:
   - admonition

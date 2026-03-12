@@ -2,6 +2,18 @@
 
 Este ejemplo muestra una integración limpia basada en una capa de servicios con `pagopar-sdk`.
 
+## Instalación
+
+```bash
+pip install pagopar-sdk django
+```
+
+O con uv:
+
+```bash
+uv add pagopar-sdk django
+```
+
 ## 1) Configuración
 
 ```python

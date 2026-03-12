@@ -2,6 +2,18 @@
 
 This example uses the app factory pattern and a small integration helper.
 
+## Installation
+
+```bash
+pip install pagopar-sdk flask
+```
+
+Or with uv:
+
+```bash
+uv add pagopar-sdk flask
+```
+
 ## 1) App factory configuration
 
 ```python
