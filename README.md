@@ -16,12 +16,22 @@ Typed, lightweight Python SDK for the Pagopar APIs covered by your Postman colle
 ## Installation
 
 ```bash
-pip install -e .
+pip install pagopar-sdk
 ```
 
 Or with uv:
 
 ```bash
+uv add pagopar-sdk
+```
+
+### Install from source (contributors)
+
+```bash
+git clone https://github.com/devpbeat/pagopar-sdk
+cd pagopar-sdk
+pip install -e .
+# or
 uv pip install -e .
 ```
 
